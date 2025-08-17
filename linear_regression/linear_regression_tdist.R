@@ -96,6 +96,12 @@ hist(results.lm$t_value,
 sum(abs(results.lm$t_value<10))
 length(results.lm$t_value)
 
+# save the file ? before or after FDR
+install.packages("writexl") 
+library(writexl)
+sheets <- split(results.lm, results.lm$Contrast)
+names(sheets) <- substr(gsub("[\\/:?*\\[\\]]", "_", names(sheets)), 1, 31)
+write_xlsx(sheets, path = "results_lm_by_contrast.xlsx")
 
 
 # FDR correction per contrast
